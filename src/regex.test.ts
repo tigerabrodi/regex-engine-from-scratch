@@ -9,3 +9,7 @@ it('matches a letter', () => {
 it('does not match a letter', () => {
   expect(regexMatch('a', 'b')).toBe(false)
 })
+
+it('matches a string', () => {
+  expect(regexMatch('ab', 'ab')).toBe(true)
+})
