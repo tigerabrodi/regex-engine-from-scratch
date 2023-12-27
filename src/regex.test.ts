@@ -21,3 +21,9 @@ it('does not match a string', () => {
 it('matches any character with a wildcard', () => {
   expect(regexMatch(SIGNS.WILDCARD, 'a')).toBe(true)
 })
+
+it('matches a character from a set', () => {
+  expect(regexMatch('[abc]', 'a')).toBe(true)
+  expect(regexMatch('[abc]', 'b')).toBe(true)
+  expect(regexMatch('[abc]', 'c')).toBe(true)
+})
