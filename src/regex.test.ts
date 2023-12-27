@@ -66,3 +66,8 @@ it('matches with alternation', () => {
   expect(regexMatch('a|b', 'a')).toBe(true)
   expect(regexMatch('a|b', 'b')).toBe(true)
 })
+
+it('matches a pattern at the beginning of a string', () => {
+  expect(regexMatch('^a', 'abc')).toBe(true)
+  expect(regexMatch('^ab', 'abc')).toBe(true)
+})

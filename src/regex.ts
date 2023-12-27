@@ -10,11 +10,19 @@ export const SIGNS = {
   SPECIFIC_REPEAT_START: '{',
   SPECIFIC_REPEAT_END: '}',
   ALTERNATE: '|',
+  MATCH_BEGINNING: '^',
 } as const
 
 export function regexMatch(regex: string, input: string) {
   const isWildCard = regex.startsWith(SIGNS.WILDCARD)
   if (isWildCard) return true
+
+  const isMatchBeginning = regex.startsWith(SIGNS.MATCH_BEGINNING)
+
+  if (isMatchBeginning) {
+    const restOfRegex = regex.slice(1)
+    return input.startsWith(restOfRegex)
+  }
 
   const isAlternate = regex.includes(SIGNS.ALTERNATE)
   if (isAlternate) {
