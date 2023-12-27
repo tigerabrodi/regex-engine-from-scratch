@@ -36,3 +36,9 @@ it('matches zero or one occurrence of a character', () => {
   expect(regexMatch('a?', '')).toBe(true)
   expect(regexMatch('a?', 'a')).toBe(true)
 })
+
+it('matches one or more occurrences of a character', () => {
+  expect(regexMatch('a+', 'a')).toBe(true)
+  expect(regexMatch('a+', 'aa')).toBe(true)
+  expect(regexMatch('a+', 'aaa')).toBe(true)
+})

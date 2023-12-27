@@ -5,12 +5,25 @@ export const SIGNS = {
   SET_START: '[',
   SET_END: ']',
   OPTIONAL: '?',
+  PLUS: '+',
 } as const
 
 export function regexMatch(regex: string, input: string) {
   let index = 0
 
   if (regex[index] === SIGNS.WILDCARD) return true
+
+  if (regex.endsWith(SIGNS.PLUS)) {
+    const firstRegexChar = regex[0]
+
+    if (input === '') return false
+
+    for (const char of input) {
+      if (char !== firstRegexChar) return false
+    }
+
+    return true
+  }
 
   if (regex.endsWith(SIGNS.OPTIONAL)) {
     return regex.includes(input) || input === '' ? true : false
