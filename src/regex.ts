@@ -16,6 +16,13 @@ export function regexMatch(regex: string, input: string) {
   const isWildCard = regex.startsWith(SIGNS.WILDCARD)
   if (isWildCard) return true
 
+  const isAlternate = regex.includes(SIGNS.ALTERNATE)
+  if (isAlternate) {
+    const [left, right] = regex.split(SIGNS.ALTERNATE)
+
+    return input === left || input === right
+  }
+
   const isSpecificRepeat = regex.endsWith(SIGNS.SPECIFIC_REPEAT_END)
   if (isSpecificRepeat) {
     let characterBeforeRepeat = ''
