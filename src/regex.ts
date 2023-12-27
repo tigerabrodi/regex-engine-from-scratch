@@ -11,14 +11,22 @@ export const SIGNS = {
   SPECIFIC_REPEAT_END: '}',
   ALTERNATE: '|',
   MATCH_BEGINNING: '^',
+  MATCH_END: '$',
 } as const
 
 export function regexMatch(regex: string, input: string) {
   const isWildCard = regex.startsWith(SIGNS.WILDCARD)
   if (isWildCard) return true
 
-  const isMatchBeginning = regex.startsWith(SIGNS.MATCH_BEGINNING)
+  const isMatchEnd = regex.endsWith(SIGNS.MATCH_END)
 
+  if (isMatchEnd) {
+    // Get the rest of the regex without the match end sign
+    const restOfRegex = regex.slice(0, regex.length - 1)
+    return input.endsWith(restOfRegex)
+  }
+
+  const isMatchBeginning = regex.startsWith(SIGNS.MATCH_BEGINNING)
   if (isMatchBeginning) {
     const restOfRegex = regex.slice(1)
     return input.startsWith(restOfRegex)

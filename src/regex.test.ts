@@ -75,3 +75,8 @@ it('matches a pattern at the beginning of a string', () => {
 it('does not match a pattern if it is not at the beginning of a string', () => {
   expect(regexMatch('^a', 'bac')).toBe(false)
 })
+
+it('matches a pattern at the end of a string', () => {
+  expect(regexMatch('a$', 'cba')).toBe(true)
+  expect(regexMatch('ba$', 'cba')).toBe(true)
+})
