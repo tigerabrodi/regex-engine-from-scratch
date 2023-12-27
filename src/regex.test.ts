@@ -53,3 +53,7 @@ it('matches zero or more occurrences of a character', () => {
   expect(regexMatch('a*', 'aa')).toBe(true)
   expect(regexMatch('a*', 'aaa')).toBe(true)
 })
+
+it('does not match incorrect characters with star operator', () => {
+  expect(regexMatch('a*', 'b')).toBe(false)
+})
