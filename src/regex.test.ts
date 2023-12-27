@@ -13,3 +13,7 @@ it('does not match a letter', () => {
 it('matches a string', () => {
   expect(regexMatch('ab', 'ab')).toBe(true)
 })
+
+it('does not match a string', () => {
+  expect(regexMatch('ab', 'ac')).toBe(false)
+})
