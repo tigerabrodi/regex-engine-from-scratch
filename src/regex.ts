@@ -6,6 +6,7 @@ export const SIGNS = {
   SET_END: ']',
   OPTIONAL: '?',
   PLUS: '+',
+  STAR: '*',
 } as const
 
 export function regexMatch(regex: string, input: string) {
@@ -13,10 +14,10 @@ export function regexMatch(regex: string, input: string) {
 
   if (regex[index] === SIGNS.WILDCARD) return true
 
-  if (regex.endsWith(SIGNS.PLUS)) {
+  if (regex.endsWith(SIGNS.PLUS) || regex.endsWith(SIGNS.STAR)) {
     const firstRegexChar = regex[0]
 
-    if (input === '') return false
+    if (input === '') return regex.endsWith(SIGNS.STAR) ? true : false
 
     for (const char of input) {
       if (char !== firstRegexChar) return false
