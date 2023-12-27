@@ -42,3 +42,7 @@ it('matches one or more occurrences of a character', () => {
   expect(regexMatch('a+', 'aa')).toBe(true)
   expect(regexMatch('a+', 'aaa')).toBe(true)
 })
+
+it('does not match when a character is not repeated for a plus sign', () => {
+  expect(regexMatch('a+', '')).toBe(false)
+})
