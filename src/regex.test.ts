@@ -57,3 +57,7 @@ it('matches zero or more occurrences of a character', () => {
 it('does not match incorrect characters with star operator', () => {
   expect(regexMatch('a*', 'b')).toBe(false)
 })
+
+it('matches a specific number of repetitions', () => {
+  expect(regexMatch('a{3}', 'aaa')).toBe(true)
+})
