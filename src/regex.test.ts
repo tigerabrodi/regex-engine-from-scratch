@@ -71,3 +71,7 @@ it('matches a pattern at the beginning of a string', () => {
   expect(regexMatch('^a', 'abc')).toBe(true)
   expect(regexMatch('^ab', 'abc')).toBe(true)
 })
+
+it('does not match a pattern if it is not at the beginning of a string', () => {
+  expect(regexMatch('^a', 'bac')).toBe(false)
+})
