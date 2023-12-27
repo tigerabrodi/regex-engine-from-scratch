@@ -9,12 +9,11 @@ export const SIGNS = {
   STAR: '*',
   SPECIFIC_REPEAT_START: '{',
   SPECIFIC_REPEAT_END: '}',
+  ALTERNATE: '|',
 } as const
 
 export function regexMatch(regex: string, input: string) {
-  let index = 0
-
-  const isWildCard = regex[index] === SIGNS.WILDCARD
+  const isWildCard = regex.startsWith(SIGNS.WILDCARD)
   if (isWildCard) return true
 
   const isSpecificRepeat = regex.endsWith(SIGNS.SPECIFIC_REPEAT_END)
@@ -65,8 +64,9 @@ export function regexMatch(regex: string, input: string) {
     return regex.includes(input) || input === '' ? true : false
   }
 
-  const isCharacterSet = regex[index] === SIGNS.SET_START
+  const isCharacterSet = regex.startsWith(SIGNS.SET_START)
   if (isCharacterSet) {
+    let index = 0
     index++
 
     const set = new Set<string>()
