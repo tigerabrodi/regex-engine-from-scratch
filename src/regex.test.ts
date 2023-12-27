@@ -61,3 +61,8 @@ it('does not match incorrect characters with star operator', () => {
 it('matches a specific number of repetitions', () => {
   expect(regexMatch('a{3}', 'aaa')).toBe(true)
 })
+
+it.skip('matches with alternation', () => {
+  expect(regexMatch('a|b', 'a')).toBe(true)
+  expect(regexMatch('a|b', 'b')).toBe(true)
+})

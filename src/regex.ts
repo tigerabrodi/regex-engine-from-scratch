@@ -14,9 +14,11 @@ export const SIGNS = {
 export function regexMatch(regex: string, input: string) {
   let index = 0
 
-  if (regex[index] === SIGNS.WILDCARD) return true
+  const isWildCard = regex[index] === SIGNS.WILDCARD
+  if (isWildCard) return true
 
-  if (regex.endsWith(SIGNS.SPECIFIC_REPEAT_END)) {
+  const isSpecificRepeat = regex.endsWith(SIGNS.SPECIFIC_REPEAT_END)
+  if (isSpecificRepeat) {
     let characterBeforeRepeat = ''
     let repeatNumber = ''
     let index = 0
@@ -37,8 +39,6 @@ export function regexMatch(regex: string, input: string) {
       index++
     }
 
-    console.log({ characterBeforeRepeat, repeatNumber })
-
     if (input === '') return false
     if (!input.includes(characterBeforeRepeat)) return false
 
@@ -47,7 +47,8 @@ export function regexMatch(regex: string, input: string) {
     return true
   }
 
-  if (regex.endsWith(SIGNS.PLUS) || regex.endsWith(SIGNS.STAR)) {
+  const isPlusOrStar = regex.endsWith(SIGNS.PLUS) || regex.endsWith(SIGNS.STAR)
+  if (isPlusOrStar) {
     const firstRegexChar = regex[0]
 
     if (input === '') return regex.endsWith(SIGNS.STAR) ? true : false
@@ -59,11 +60,13 @@ export function regexMatch(regex: string, input: string) {
     return true
   }
 
-  if (regex.endsWith(SIGNS.OPTIONAL)) {
+  const isOptional = regex.endsWith(SIGNS.OPTIONAL)
+  if (isOptional) {
     return regex.includes(input) || input === '' ? true : false
   }
 
-  if (regex[index] === SIGNS.SET_START) {
+  const isCharacterSet = regex[index] === SIGNS.SET_START
+  if (isCharacterSet) {
     index++
 
     const set = new Set<string>()
