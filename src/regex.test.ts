@@ -80,3 +80,13 @@ it('matches a pattern at the end of a string', () => {
   expect(regexMatch('a$', 'cba')).toBe(true)
   expect(regexMatch('ba$', 'cba')).toBe(true)
 })
+
+it('matches any character from a range', () => {
+  expect(regexMatch('[a-c]', 'a')).toBe(true)
+  expect(regexMatch('[a-c]', 'b')).toBe(true)
+  expect(regexMatch('[a-c]', 'c')).toBe(true)
+})
+
+it('does not match characters outside of a range', () => {
+  expect(regexMatch('[a-c]', 'd')).toBe(false)
+})

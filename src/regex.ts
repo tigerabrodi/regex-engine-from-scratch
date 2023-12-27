@@ -10,9 +10,46 @@ export const SIGNS = {
   SPECIFIC_REPEAT_START: '{',
   SPECIFIC_REPEAT_END: '}',
   ALTERNATE: '|',
+  RANGE: '-',
   MATCH_BEGINNING: '^',
   MATCH_END: '$',
 } as const
+
+const ALL_CHARACTERS_IN_ARRAY_SORTED = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+]
+
+function getCharactersFromRange(start: string, end: string) {
+  const startIndex = ALL_CHARACTERS_IN_ARRAY_SORTED.indexOf(start)
+  const endIndex = ALL_CHARACTERS_IN_ARRAY_SORTED.indexOf(end)
+
+  return ALL_CHARACTERS_IN_ARRAY_SORTED.slice(startIndex, endIndex + 1) // +1 because endIndex is not included, .slice includes up to, but not including endIndex
+}
 
 export function regexMatch(regex: string, input: string) {
   const isWildCard = regex.startsWith(SIGNS.WILDCARD)
@@ -88,6 +125,19 @@ export function regexMatch(regex: string, input: string) {
   }
 
   const isCharacterSet = regex.startsWith(SIGNS.SET_START)
+  const isRange = isCharacterSet && regex.includes(SIGNS.RANGE)
+
+  if (isRange) {
+    const firstCharacter = regex[1]
+    const lastCharacter = regex[3]
+
+    const charactersFromRange = getCharactersFromRange(
+      firstCharacter,
+      lastCharacter
+    )
+    return charactersFromRange.includes(input)
+  }
+
   if (isCharacterSet) {
     let index = 0
     index++
