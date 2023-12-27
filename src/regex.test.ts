@@ -27,3 +27,7 @@ it('matches a character from a set', () => {
   expect(regexMatch('[abc]', 'b')).toBe(true)
   expect(regexMatch('[abc]', 'c')).toBe(true)
 })
+
+it('does not match a character outside of a set', () => {
+  expect(regexMatch('[abc]', 'd')).toBe(false)
+})
