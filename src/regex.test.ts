@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 
-import { SIGNS, regexMatch } from './regex'
+import { regexMatch } from './regex'
 
 it('matches a letter', () => {
   expect(regexMatch('a', 'a')).toBe(true)
@@ -19,7 +19,7 @@ it('does not match a string', () => {
 })
 
 it('matches any character with a wildcard', () => {
-  expect(regexMatch(SIGNS.WILDCARD, 'a')).toBe(true)
+  expect(regexMatch('.', 'a')).toBe(true)
 })
 
 it('matches a character from a set', () => {
@@ -30,4 +30,9 @@ it('matches a character from a set', () => {
 
 it('does not match a character outside of a set', () => {
   expect(regexMatch('[abc]', 'd')).toBe(false)
+})
+
+it('matches zero or one occurrence of a character', () => {
+  expect(regexMatch('a?', '')).toBe(true)
+  expect(regexMatch('a?', 'a')).toBe(true)
 })
